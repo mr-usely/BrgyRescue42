@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "nodemon index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-prebuild": "cd client && export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+    "heroku-postbuild": "cd client && export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production; && npm install && npm run build"
   },
   "keywords": [],
   "author": "kim",
