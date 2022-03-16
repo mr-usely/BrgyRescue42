@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const server = 'http://localhost:5000';
+const server = 'https://emergency-app-server.herokuapp.com';
 
 export const adminAuth = async (params) => {
     const res = await axios.get(`${server}${params}`);

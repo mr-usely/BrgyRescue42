@@ -2,7 +2,7 @@
     "name": "emergency_admin_client",
     "version": "3.0.1",
     "private": true,
-    "homepage": "http://10.0.0.45:4000",
+    "homepage": "https://emergency-app-server.herokuapp.com",
     "dependencies": {
         "@emotion/cache": "^11.4.0",
         "@emotion/react": "^11.4.0",

@@ -317,7 +317,7 @@ const AllUsers = () => {
                                                         }
                                                         includeMargin
                                                         imageSettings={{
-                                                            src: '/api/static/media/location-icon_v.00bffa54.png',
+                                                            src: '/static/media/location-icon_v.00bffa54.png',
                                                             height: 90,
                                                             width: 90
                                                         }}
