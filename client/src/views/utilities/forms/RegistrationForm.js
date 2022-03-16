@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import QRCode from 'qrcode.react';
 
@@ -38,6 +38,7 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { SET_USER_DATA, SEND_VALUES } from 'store/dataActions';
+import { ADMIN_LOG } from 'store/adminActions';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
@@ -45,6 +46,7 @@ const RegistrationForm = ({ ...others }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const scriptedRef = useScriptRef();
+    const form = useRef(null);
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const loading = useSelector((state) => state.user);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -79,8 +81,14 @@ const RegistrationForm = ({ ...others }) => {
 
     const handleClose = () => {
         setOpenDialog(false);
-        window.location = '/';
+        form.current.reset();
+        handleClearInputs();
     };
+
+    const handleReset = (resetForm) => {
+        resetForm();
+        handleClearInputs();
+    }
 
     const handleClearInputs = () => {
         setFirstName('');
@@ -184,13 +192,13 @@ const RegistrationForm = ({ ...others }) => {
                     email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
                     password: Yup.string().max(255).required('Password is required')
                 })}
-                onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+                onSubmit={async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
                     try {
                         if (scriptedRef.current) {
                             setStatus({ success: isSuccess });
                             setSubmitting(false);
                             dispatch({ type: SEND_VALUES, infoArr: values });
-                            console.log(values);
+                            resetForm();
                             // submitReg(values);
                         }
                     } catch (err) {
@@ -204,7 +212,7 @@ const RegistrationForm = ({ ...others }) => {
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
-                    <form noValidate onSubmit={handleSubmit} {...others}>
+                    <form ref={form} noValidate onSubmit={handleSubmit} {...others}>
                         <Grid container spacing={matchDownSM ? 0 : 2}>
                             <Grid item xs={12} sm={5}>
                                 <FormControl fullWidth sx={{ ...theme.typography.customInput }}>
@@ -555,7 +563,7 @@ const RegistrationForm = ({ ...others }) => {
                                             fullWidth
                                             size="medium"
                                             variant="outlined"
-                                            onClick={handleClearInputs}
+                                            onClick={handleReset.bind(null, resetForm)}
                                             sx={{
                                                 color: 'grey.700',
                                                 backgroundColor: theme.palette.grey[50],
