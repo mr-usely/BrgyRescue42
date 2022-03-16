@@ -96,7 +96,7 @@ const UserPreview = () => {
                         <Grid item xs={12} sm={2}>
                             <Grid container direction="column">
                                 <Typography sx={{ fontSize: '1rem', fontWeight: 600 }}>Organ Donor</Typography>
-                                <Typography sx={{ fontSize: '0.9rem', mt: 1 }}>{data.organDonor}</Typography>
+                                <Typography sx={{ fontSize: '0.9rem', mt: 1 }}>{data.organDonor == 1 ? 'Yes' : 'No'}</Typography>
                             </Grid>
                         </Grid>
                     </Grid>

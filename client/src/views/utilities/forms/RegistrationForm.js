@@ -20,7 +20,9 @@ import {
     Dialog,
     DialogContent,
     DialogContentText,
-    DialogTitle
+    DialogTitle,
+    Select,
+    MenuItem
 } from '@mui/material';
 
 // third party
@@ -418,8 +420,23 @@ const RegistrationForm = ({ ...others }) => {
                             </Grid>
                             <Grid item xs={12} sm={2}>
                                 <FormControl fullWidth sx={{ ...theme.typography.customInput }}>
-                                    <InputLabel htmlFor="outlined-adornment-organ-donor">Organ Donor</InputLabel>
-                                    <OutlinedInput
+                                    <InputLabel htmlFor="select-adornment-organ-donor">Organ Donor</InputLabel>
+                                    <Select
+                                        labelId="select-adornment-organ-donor"
+                                        id="select-organ-donor"
+                                        name="organDonor"
+                                        value={organDonor}
+                                        onBlur={handleBlur}
+                                        onChange={(e) => {
+                                            handleChange(e);
+                                            setOrganDonor(e.target.value);
+                                        }}
+                                        inputlabelprops={{ shrink: true }}
+                                    >
+                                        <MenuItem value={1}>Yes</MenuItem>
+                                        <MenuItem value={0}>No</MenuItem>
+                                    </Select>
+                                    {/* <OutlinedInput
                                         id="outlined-adornment-organ-donor"
                                         type="text"
                                         value={values.organDonor}
@@ -430,7 +447,7 @@ const RegistrationForm = ({ ...others }) => {
                                             setOrganDonor(e.target.value);
                                         }}
                                         inputProps={{}}
-                                    />
+                                    /> */}
                                 </FormControl>
                             </Grid>
                         </Grid>

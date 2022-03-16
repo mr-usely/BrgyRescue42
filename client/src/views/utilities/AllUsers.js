@@ -14,7 +14,9 @@ import {
     DialogTitle,
     Typography,
     Button,
-    IconButton
+    IconButton,
+    Select,
+    MenuItem
 } from '@mui/material';
 
 // third party
@@ -665,7 +667,22 @@ const AllUsers = () => {
                                                     {isUpdate ? (
                                                         <FormControl fullWidth sx={{ ...theme.typography.customInput }}>
                                                             <InputLabel htmlFor="outlined-adornment-organ-donor">Organ Donor</InputLabel>
-                                                            <OutlinedInput
+                                                            <Select
+                                                                labelId="select-adornment-organ-donor"
+                                                                id="select-organ-donor"
+                                                                name="organDonor"
+                                                                value={values.organDonor}
+                                                                onBlur={handleBlur}
+                                                                onChange={(e) => {
+                                                                    handleChange(e);
+                                                                }}
+                                                                inputlabelprops={{ shrink: true }}
+                                                                inputProps={{}}
+                                                            >
+                                                                <MenuItem value={1}>Yes</MenuItem>
+                                                                <MenuItem value={0}>No</MenuItem>
+                                                            </Select>
+                                                            {/* <OutlinedInput
                                                                 id="outlined-adornment-organ-donor"
                                                                 type="text"
                                                                 value={values.organDonor}
@@ -673,7 +690,7 @@ const AllUsers = () => {
                                                                 onBlur={handleBlur}
                                                                 onChange={handleChange}
                                                                 inputProps={{}}
-                                                            />
+                                                            /> */}
                                                         </FormControl>
                                                     ) : (
                                                         <>
@@ -682,7 +699,7 @@ const AllUsers = () => {
                                                                     Organ Donor
                                                                 </Typography>
                                                                 <Typography sx={{ fontSize: '0.9rem', mt: 1 }}>
-                                                                    {userData[0] != undefined && userData[0].organdonor}
+                                                                    {userData[0] != undefined && (userData[0].organdonor == 1 ? 'Yes' : 'No')}
                                                                 </Typography>
                                                             </Grid>
                                                         </>

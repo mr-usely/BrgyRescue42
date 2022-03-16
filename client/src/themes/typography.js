@@ -86,6 +86,28 @@ export default function themeTypography(theme) {
                 top: 0
             }
         },
+        customSelect: {
+            marginTop: 1,
+            marginBottom: 1,
+            '& > label': {
+                top: 23,
+                left: 0,
+                color: theme.grey500,
+                '&[data-shrink="false"]': {
+                    top: 10
+                }
+            },
+            '& > div > input': {
+                padding: '52px 10px 50px !important'
+            },
+            '& legend': {
+                display: 'none',
+                padding: '10px 10px 10px 10px !important'
+            },
+            '& fieldset': {
+                top: 0
+            }
+        },
         mainContent: {
             backgroundColor: theme.background,
             width: '100%',
