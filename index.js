@@ -229,9 +229,9 @@ app.get('/user/totals', async (req, res) => {
 
 // ================== EMERGENCY REPORT ================== //
 
-app.post('/report/:id/emergency', async (req, res) => {
+app.post('/report/:username/emergency', async (req, res) => {
     try {
-        const { id } = req.params;
+        const { username } = req.params;
         const { location } = req.body;
 
         const query = `
@@ -243,11 +243,11 @@ app.post('/report/:id/emergency', async (req, res) => {
                 contactnumber as contactnoptc,
                 $1 as currlocation,
                 CURRENT_TIMESTAMP as datereported
-            FROM tblappusers WHERE id = $2
+            FROM tblappusers WHERE username = $2
             RETURNING *
         `;
 
-        const result = await pool.query(query,[location, id]);
+        const result = await pool.query(query,[location, username]);
         res.json(result.rows[0]);
     } catch (err) {
         console.error(err.message);
