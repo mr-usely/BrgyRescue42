@@ -302,6 +302,18 @@ app.get('/get/brgys', async (req, res) => {
     }
 });
 
+app.get('/get/reports/', async (req, res) => {
+    try {
+        const query = 'SELECT * FROM tblemergencyreport';
+
+        const result = await pool.query(query);
+        console.log(result.rows);
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 app.get('/totals/graph', async (req, res) => {
     try {
         const query = `
